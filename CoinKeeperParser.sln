@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeperParser", "CoinKeeperParser.csproj", "{67B26FCD-6285-4D66-9FD9-33CE73048A00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeperParser", "CoinKeeperParser\CoinKeeperParser.csproj", "{C6EF2FCF-D129-431C-9C54-BD9D2891149C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeperApiClient", "CoinKeeperApiClient\CoinKeeperApiClient.csproj", "{115BB42A-2885-44DC-A1AA-3023C111852B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{886DFC6F-38E1-4F92-AD02-60E2D0AAD9D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +12,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{67B26FCD-6285-4D66-9FD9-33CE73048A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67B26FCD-6285-4D66-9FD9-33CE73048A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67B26FCD-6285-4D66-9FD9-33CE73048A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67B26FCD-6285-4D66-9FD9-33CE73048A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6EF2FCF-D129-431C-9C54-BD9D2891149C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6EF2FCF-D129-431C-9C54-BD9D2891149C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6EF2FCF-D129-431C-9C54-BD9D2891149C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6EF2FCF-D129-431C-9C54-BD9D2891149C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115BB42A-2885-44DC-A1AA-3023C111852B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115BB42A-2885-44DC-A1AA-3023C111852B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115BB42A-2885-44DC-A1AA-3023C111852B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115BB42A-2885-44DC-A1AA-3023C111852B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{886DFC6F-38E1-4F92-AD02-60E2D0AAD9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{886DFC6F-38E1-4F92-AD02-60E2D0AAD9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{886DFC6F-38E1-4F92-AD02-60E2D0AAD9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{886DFC6F-38E1-4F92-AD02-60E2D0AAD9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

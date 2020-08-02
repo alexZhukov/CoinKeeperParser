@@ -4,7 +4,7 @@ using CoinKeeperParser.Models.CsvEntities;
 
 namespace CoinKeeperParser.Helpers
 {
-    public static class CoinKeeperParserHelper
+    internal static class CoinKeeperParserHelper
     {
         public static Func<Dictionary<string, string>, Operation> OperationSelector = d => new Operation
         {

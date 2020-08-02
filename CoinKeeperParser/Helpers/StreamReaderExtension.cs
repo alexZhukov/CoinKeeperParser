@@ -6,7 +6,7 @@ namespace CoinKeeperParser.Helpers
     /// <summary>
     /// https://stackoverflow.com/a/22975649
     /// </summary>
-    public static class StreamReaderExtensions
+    internal static class StreamReaderExtensions
     {
         private static readonly FieldInfo charPosField = typeof(StreamReader).GetField("_charPos",
             BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
