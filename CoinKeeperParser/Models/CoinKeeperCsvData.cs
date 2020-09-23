@@ -3,6 +3,9 @@ using CoinKeeperParser.Models.CsvEntities;
 
 namespace CoinKeeperParser.Models
 {
+    /// <summary>
+    /// Model with result parsing csv file from CoinKeeper app v.2 (Android)
+    /// </summary>
     public class CoinKeeperCsvData
     {
         public List<Category> Categories;

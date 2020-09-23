@@ -1,20 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoinKeeperApiClient;
 using CoinKeeperApiClient.Client.Models;
-using CoinKeeperParser.Models;
 
-namespace CoinKeeperParser
+namespace Sandbox
 {
-    internal class Program
+    public class CoinKeeperManager
     {
-        private static async Task Main(string[] args)
+        private readonly ICoinKeeperClient _coinKeeperClient;
+
+        public CoinKeeperManager(ICoinKeeperClient coinKeeperClient)
         {
-            Console.WriteLine("Start");
-            string authCookie = "PLACE_COOKIE_VALUE_HERE";
-            var webDataGetter = new CoinKeeperClient(authCookie);
-            PingResponse pingResponse = await webDataGetter.Ping();
+            _coinKeeperClient = coinKeeperClient;
+        }
+
+        /// <summary>
+        /// Export transactions history for period from <paramref name="from"/> to <paramref name="to"/>
+        /// </summary>
+        /// <param name="from">Date from</param>
+        /// <param name="to">date to</param>
+        /// <returns></returns>
+        public async Task<List<Transaction>> ExportData(DateTime from, DateTime to)
+        {
+            PingResponse pingResponse = await _coinKeeperClient.Ping();
 
             string userId = pingResponse.UserInfo.UserId;
             GetTransactionsRequest request = new GetTransactionsRequest(userId) {
@@ -22,28 +31,19 @@ namespace CoinKeeperParser
                 Skip = 0,
                 Period = new Period
                 {
-                    From = new DateTime(2020, 02, 01),
-                    To = new DateTime(2020, 03, 01),
+                    From = from,
+                    To = to,
                 }
             };
-            //var transactionsResponse = await webDataGetter.GetTransactions(request);
 
-            var result = await GetAllTransactionsForPeriod(webDataGetter, userId, new DateTime(2020, 02, 01), new DateTime(2020, 03, 01));
-            
-            var coinKeeperCsvParser = new CoinKeeperCsvParser();
-            CoinKeeperCsvData data = coinKeeperCsvParser
-                .Parse(@"INSERT_PATH_TO_CSV_FILE_HERE");
-
-            Console.WriteLine(data.Accounts);
-            Console.WriteLine("Finish");
-            Console.ReadKey();
+            List<Transaction> result = await GetAllTransactionsForPeriod(userId, from, to);
+            return result;
         }
-
-
-        public static async Task<List<Transaction>> GetAllTransactionsForPeriod(CoinKeeperClient coinKeeperClient, 
-            string userId, DateTime startDate, DateTime endDate)
+        
+        private async Task<List<Transaction>> GetAllTransactionsForPeriod(string userId, DateTime startDate, DateTime endDate)
         {
             int skip = 0;
+            // API has no limit, this value equal value from coinkeeper web version
             const int STEP_SIZE = 20;
 
             List<Transaction> result = new List<Transaction>();
@@ -59,7 +59,7 @@ namespace CoinKeeperParser
                         To = endDate
                     }
                 };
-                transactionsResponse = await coinKeeperClient.GetTransactions(request);
+                transactionsResponse = await _coinKeeperClient.GetTransactions(request);
                 if (transactionsResponse?.Transactions.Count > 0)
                 {
                     result.AddRange(transactionsResponse.Transactions);

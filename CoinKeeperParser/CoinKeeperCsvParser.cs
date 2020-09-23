@@ -12,6 +12,15 @@ namespace CoinKeeperParser
 {
     public class CoinKeeperCsvParser
     {
+        private class CoinKeeperFileStructure
+        {
+            public string Categories;
+            public string Incoming;
+            public string Operations;
+            public string Accounts;
+            public string Tags;
+        }
+
         public CoinKeeperCsvData Parse(string filepath)
         {
             if (!File.Exists(filepath))
@@ -58,6 +67,7 @@ namespace CoinKeeperParser
             {
                 long position = reader.GetPosition();
                 var str = reader.ReadLine();
+                // если началась следующая секция
                 if (!string.IsNullOrWhiteSpace(str) 
                     && (str.StartsWith("\"Название\"") 
                         || str.StartsWith("\"Данные\"")))
@@ -90,7 +100,7 @@ namespace CoinKeeperParser
                             return null;
                         }
 
-                        var dict = enumerable.ToDictionary(x => x.Key, x => (string)x.Value);
+                        Dictionary<string, string> dict = enumerable.ToDictionary(x => x.Key, x => (string)x.Value);
                             T data = rowSelector(dict);
                             return data;
                         }) 
@@ -98,15 +108,6 @@ namespace CoinKeeperParser
                 
                 return result;
             }
-        }
-        
-        private class CoinKeeperFileStructure
-        {
-            public string Categories;
-            public string Incoming;
-            public string Operations;
-            public string Accounts;
-            public string Tags;
         }
     }
 }
